@@ -1,5 +1,26 @@
 package main
 
+import scala.util.control.Breaks
+
+/**
+  * 导入包
+  */
+
+//导入多个类
+import scala.math.BigDecimal,scala.math.BigInt
+import scala.math.{BigInt,BigDecimal}
+
+//导入包下的所有事物
+import scala.math._
+
+//别名
+import scala.math.{
+BigDecimal=>BD,
+BigInt=>BI
+}
+
+
+
 /**
   *
   * @Author: huangtinghai
@@ -28,23 +49,147 @@ package main
   */
 object HelloWorld {
   def main(args: Array[String]): Unit = {
-    val a :Int= 1
-    val h=2
+    val a: Int = 1
+    val h = 2
     println(h)
     println(a)
 
-    val b :String ="b"
+    val b: String = "b"
     println(b)
 
-    val c :Char ='c'
+    val c: Char = 'c'
     println(c)
+
+    /**
+      * 包 别名
+      */
+    val l1=BD.decimal(10)
+    val l2=BI.apply(2)
+    println(l1)
+    println(l2)
 
 
     /**
       * 多元变量
       */
-    var a1,a2=100
-    val map=(40,"abc")
+    var a1, a2 = 100
+    val map = (40, "abc")
     println(map)
+
+
+    /**
+      * 位运算
+      */
+    val A = 60
+    val B = 13
+    println(A << 2) //左移
+    println(A >> 2) //右移
+    println(A & B) //与
+    println(A | B) //或
+    println(A ^ B) //异或
+    println(~A) //非
+
+
+    /**
+      * 赋值运算符
+      */
+
+    var t = 1
+    var result = 0
+    result += t
+    println("result t+=1 :" + result)
+    result <<= t
+    println("result t<<=1 :" + result)
+
+
+    /**
+      * 条件语句
+      */
+
+    //if  ... else....
+    val x = 30
+    if (x < 20) {
+      println("x<20")
+    } else {
+      println("x>20")
+    }
+
+    //if ....else if....else
+
+    if (x == 10) {
+      println("x==10")
+    } else if (x == 20) {
+      println("x==20")
+    } else {
+      println("x==other")
+    }
+
+
+    /**
+      * 循环语句
+      */
+
+    val numlist = List(1, 2, 3, 4, 5)
+    val loop = new Breaks
+    var i = 0
+
+
+    //for循环
+    var i1=0
+    var i2=0
+    var i3=0
+    var i4=0
+    var num=0
+    for(i1 <- 1 to 5){
+      println("i1 :"+i1)
+    }
+
+    for(i2 <- 1 until 5){
+      println("i2 :"+i2)
+    }
+
+    for(i3 <- 1 to 2 ; i4 <- 1 to 2){
+      println("i3 :" + i3)
+      println("i4 :" + i4)
+    }
+
+    //循环条件过滤
+    for(num<-numlist
+            if num ==2){
+      println("循环条件过滤 num = "+num)
+    }
+
+    var num2=0
+    //循环返回值 (返回值是集合)
+    var reVal=for{num2<-numlist if num2 != 2}yield num2
+    for (num2<-reVal){
+      println("循环返回值 num2 = "+num2)
+    }
+
+
+
+
+    //中断方式1
+    loop.breakable {
+      for (i <- numlist) {
+        println("value a: " + i)
+        if (i == 3) {
+          loop.break
+        }
+      }
+    }
+    println("end 1")
+
+    //中断方式2
+    import scala.util.control.Breaks._ //_为通配符，类似java的*
+    breakable{
+      for (i <- numlist) {
+        println("value a: " + i)
+        if (i == 2) {
+            break
+        }
+      }
+    }
+    println("end 2")
   }
 }
