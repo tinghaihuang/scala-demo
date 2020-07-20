@@ -52,6 +52,18 @@ object FunctionTest {
   val multilier=(i:Int)=>i*factor
 
 
+  //模式匹配 类似java的switch case
+ //case的值也可以是对象
+  def matchTest1(x:Any):String = x match {
+    case 1 => "one"
+    case 2 => "two"
+    case _ => "other"
+  }
+
+
+
+
+
 
   def main(args: Array[String]){
     myPrint("hello , scala !")
@@ -85,6 +97,10 @@ object FunctionTest {
 
     //闭包
     println("闭包 "+multilier(2))
+
+
+    //模式匹配
+    println("模式匹配 "+matchTest(3))
   }
 
 }
