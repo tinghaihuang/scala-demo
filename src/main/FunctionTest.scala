@@ -1,4 +1,8 @@
 package main
+import java.io.FileReader
+import java.io.{FileNotFoundException, FileReader, IOException}
+
+import scala.util.matching.Regex
 
 object FunctionTest {
 
@@ -54,10 +58,14 @@ object FunctionTest {
 
   //模式匹配 类似java的switch case
  //case的值也可以是对象
-  def matchTest1(x:Any):String = x match {
+  def matchTest1(x:Any):Any = x match {
     case 1 => "one"
     case 2 => "two"
-    case _ => "other"
+    case 0 | "" => false    //在0或空字符串的情况下,返回false
+    case  4 | 6 | 8 | 10 => "偶数"     //在10及以下的偶数,返回"偶数"
+    case m if m == 5 || m == 7 => "5 company, 7 crowd"    //在模式匹配中使用if
+    case y:Int=> "other Int"
+    case _ => "other Obj"
   }
 
 
@@ -100,7 +108,36 @@ object FunctionTest {
 
 
     //模式匹配
-    println("模式匹配 "+matchTest(3))
+    println("模式匹配 "+matchTest1(3))
+    println("模式匹配 "+matchTest1("s"))
+    println("模式匹配 "+ matchTest1(5))
+    println("模式匹配 "+matchTest1(4))
+
+
+
+    //正则表达 继承了java的正则表达规则
+    val pattern=new Regex("(S|s)cala")  //或者 "Scala".r 使用String 类的r()方法构造regex对象
+    val str ="Scala is scalable and cool"
+    println("正则表达"+ (pattern findFirstIn str))
+    println("正则表达"+ (pattern findAllIn  str).mkString(","))  //mkString 连接匹配结果
+    println("正则表达"+ (pattern replaceAllIn(str,"java"))) //替换
+
+
+
+
+    //异常处理
+    try {
+    //  val f = FileReader("1.txt")
+    }catch {
+      case ex: FileNotFoundException =>
+        println("file not found")
+      case ex: IOException => {
+        println("IO Exception")
+      }
+    }
+
+
+
   }
 
 }
