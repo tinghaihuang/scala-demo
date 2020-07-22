@@ -1,7 +1,7 @@
 package main
 import Array._
 import scala.collection.mutable
-import scala.collection.mutable.Map
+import scala.collection.mutable.{ListBuffer, Map}
 
 object CollectionsTest {
 
@@ -35,8 +35,17 @@ object CollectionsTest {
     val site: List[String] = List("Runoob", "Google", "Baidu")
     val site2 = "Runoob" :: ("Google" :: ("Baidu" :: Nil))
 
-    // 整型列表
+    mutable.MutableList
+    // 列表
     var nums = List(1, 2, 3, 4,"c")
+
+    //可变列表
+    var buffer = new ListBuffer[String]
+    buffer+="a"
+    buffer+="b"
+    println("可变列表 "+buffer)
+    buffer-="b"
+    println("可变列表 "+buffer)
 
 
     // 空列表
@@ -61,6 +70,7 @@ object CollectionsTest {
       println("list "+l)
     }
     re4.foreach(println)
+    println("查询 "+nums(1))
     println("drop "+nums.drop(2))  //删除前n个元素
     println("head "+nums.head)      //返回第一个元素
     println("tail "+nums.tail)      //返回除第一个元素的其他元素
@@ -86,11 +96,14 @@ object CollectionsTest {
     //不可变
     val set1 = Set(1,2,"a")
     println(set1)
+    var hh= mutable.Set(1,2)
 
     //可变set
     import scala.collection.mutable.Set
 
+
     val set2 = Set(3,2,1,"a")
+    println(set2(1))
     set2.add(4)
     println("mutable add "+set2)
     set2.remove(2)

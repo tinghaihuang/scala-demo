@@ -130,7 +130,6 @@ object HelloWorld {
       */
 
     val numlist = List(1, 2, 3, 4, 5)
-    val loop = new Breaks
     var i = 0
 
 
@@ -168,7 +167,7 @@ object HelloWorld {
 
 
 
-
+    val loop = new Breaks
     //中断方式1
     loop.breakable {
       for (i <- numlist) {
