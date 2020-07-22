@@ -80,6 +80,8 @@ object HelloWorld {
     /**
       * 位运算
       */
+    println("============================= 位运算 =========================================")
+
     val A = 60
     val B = 13
     println(A << 2) //左移
@@ -94,6 +96,8 @@ object HelloWorld {
       * 赋值运算符
       */
 
+    println("============================= 赋值 =========================================")
+
     var t = 1
     var result = 0
     result += t
@@ -105,6 +109,7 @@ object HelloWorld {
     /**
       * 条件语句
       */
+    println("============================= 条件 =========================================")
 
     //if  ... else....
     val x = 30
@@ -128,8 +133,9 @@ object HelloWorld {
     /**
       * 循环语句
       */
-
+      println("============================= 循环 =========================================")
     val numlist = List(1, 2, 3, 4, 5)
+    val loop = new Breaks
     var i = 0
 
 
@@ -146,6 +152,7 @@ object HelloWorld {
     for(i2 <- 1 until 5){
       println("i2 :"+i2)
     }
+    println("============================= 循环 多区间  =========================================")
 
     for(i3 <- 1 to 2 ; i4 <- 1 to 2){
       println("i3 :" + i3)
@@ -154,20 +161,19 @@ object HelloWorld {
 
     //循环条件过滤
     for(num<-numlist
-            if num ==2){
+            if num >2 if num==3 ){
       println("循环条件过滤 num = "+num)
     }
 
     var num2=0
     //循环返回值 (返回值是集合)
-    var reVal=for{num2<-numlist if num2 != 2}yield num2
-    for (num2<-reVal){
-      println("循环返回值 num2 = "+num2)
-    }
+    var reVal=for(num2<-numlist if num2 != 2)yield num2
+    println( "循环返回值 num2 = "+reVal)
 
 
 
-    val loop = new Breaks
+    println("============================= 循环 中断  =========================================")
+
     //中断方式1
     loop.breakable {
       for (i <- numlist) {
